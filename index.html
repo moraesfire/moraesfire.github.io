@@ -440,7 +440,8 @@
         if (authResult && !authResult.error) {
 			loadCalendarApi();
         } else {
-			document.getElementById('sheet').innerHTML = '<span>Authorize access to Google Calendar API</span><button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>'
+			
+			document.getElementById('calendar').innerHTML = '<span>Authorize access to Google Calendar API</span><button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>'
         }
       }
 
