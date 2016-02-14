@@ -417,7 +417,7 @@
 	Events = []
       var CLIENT_ID = '902405926255-9l2qshjqmhbap86vl78ui7cjbq9kgdg1.apps.googleusercontent.com';
 
-      var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
+      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
       /**
        * Check if current user has authorized this application.
@@ -441,7 +441,7 @@
 			loadCalendarApi();
         } else {
 			
-			document.getElementById('calendar').innerHTML = '<span>Authorize access to Google Calendar API</span><button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>'
+			document.getElementById('calendar').innerHTML = '<span>Authorize access to Google Calendar API</span></br><button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>'
         }
       }
 
@@ -473,7 +473,6 @@
       function listUpcomingEvents() {
         var request = gapi.client.calendar.events.list({
           'calendarId': 'primary',
-//          'timeMin': (new Date()).toISOString(),
           'showDeleted': false,
           'singleEvents': true,
           'orderBy': 'startTime'
@@ -684,6 +683,16 @@ function NewEvent(){
 	vDate = document.getElementById("display").getElementsByTagName("input")[8].value
 	vCol = document.querySelector('input[name="calicons"]:checked').getAttribute("id")
 	alert ('Event: '+vEve+"\n\rCom: "+vCom+"\n\rDate: "+vDate+"\n\rColor: "+vCol)
+}
+
+function TestGCAL(){
+	Event event = new Event()
+    .setSummary("Google I/O 2015")
+    .setDescription("A chance to hear more about Google's developer products.");
+	.setColorId("5")
+	.setStart("2016-03-04")
+	.setEnd("2016-03-05")
+	gapi.client.calendar.events().insert("primary", event).execute()
 }
 
 
