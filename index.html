@@ -680,6 +680,13 @@ function AddEvent(input){
 	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="NewEvent()">OK</span>'
 	
 	if ((typeof input == "string")&&(input.length == 10)) document.getElementById("display").getElementsByTagName("input")[8].value = input
+	if (typeof input == "object"){
+		document.getElementById("display").getElementsByTagName("textarea")[0].value = input[3]
+		document.getElementById("display").getElementsByTagName("input")[7].value = input[2]
+		document.getElementById("display").getElementsByTagName("input")[8].value = input[1]
+		document.getElementById("CalCat").getElementsByTagName("input")[input[0]].checked = true
+		document.getElementById("okbtn").onclick = NewEvent(input[4])
+	}
 }
 
 function NewEvent(){
