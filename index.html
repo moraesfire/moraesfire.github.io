@@ -685,7 +685,7 @@ function AddEvent(input){
 		document.getElementById("display").getElementsByTagName("input")[7].value = input[2]
 		document.getElementById("display").getElementsByTagName("input")[8].value = input[1]
 		document.getElementById("CalCat").getElementsByTagName("input")[input[0]].checked = true
-		document.getElementById("okbtn").onclick = NewEvent(input[4])
+		document.getElementById("okbtn").onclick = function(){NewEvent(input[4])}
 	}
 }
 
