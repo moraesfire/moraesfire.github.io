@@ -3,7 +3,6 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	<script src="https://apis.google.com/js/client.js"></script>
 
 	
 	<style type="text/css">
@@ -414,6 +413,7 @@
 <span id="todo">
 </span>
 
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 <script>
 	Events = []
       var CLIENT_ID = '902405926255-9l2qshjqmhbap86vl78ui7cjbq9kgdg1.apps.googleusercontent.com';
@@ -1003,7 +1003,7 @@ function refreshicon(type,data){
 }
 
 RenderTasks()
-checkAuth()
+//checkAuth()
 RenderCalendar()
 </script>
 	<span class="clone" style="display:none;">
