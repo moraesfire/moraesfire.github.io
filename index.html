@@ -686,7 +686,7 @@ function NewEvent(){
 
 	if(vEve&&vDate){
 		var tempDate = new Date(vDate.split("-")[0],Number(vDate.split("-")[1])-1,vDate.split("-")[2])
-		tempDate.setDate(+1)
+		tempDate.setDate(tempDate.getDate()+1)
 		var resource = {
 		  "summary": vEve,
 		  "colorId": EventIcons(vCor),
