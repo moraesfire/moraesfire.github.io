@@ -686,12 +686,7 @@ function NewEvent(){
 }
 
 function TestGCAL(){
-	Event event = new Event()
-    .setSummary("Google I/O 2015")
-    .setDescription("A chance to hear more about Google's developer products.");
-	.setColorId("5")
-	.setStart("2016-03-04")
-	.setEnd("2016-03-05")
+	event = {"summary":"Google I/O 2015","description":"A chance to hear more about Google's developer products.","colorId":"5","start":{"date":"2016-03-04"},"end":{"date":"2016-03-05"}}
 	gapi.client.calendar.events().insert("primary", event).execute()
 }
 
