@@ -695,7 +695,7 @@ function NewEvent(){
 			"date": vDate
 		  },
 		  "end": {
-			"date": tempDate.getFullYear()+"-"+('0'+(tempDate.GetMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)
+			"date": tempDate.getFullYear()+"-"+('0'+(tempDate.getMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)
 			}
 		  };
 		var request = gapi.client.calendar.events.insert({
