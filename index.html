@@ -634,7 +634,7 @@ function RenderCalendar(){
 	var DateFirst = new Date(tfirst.split("-")[0],tfirst.split("-")[1],tfirst.split("-")[2])
 	var DateLast =  new Date(tlast.split("-")[0],tlast.split("-")[1],tlast.split("-")[2])
 	if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
-		document.getElementById(tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2).setAttribute("class",document.getElementById(tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)).getAttribute("class")+" today")
+		document.getElementById(tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)).setAttribute("class",document.getElementById(tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)).getAttribute("class")+" today")
 	}	
 }
 
