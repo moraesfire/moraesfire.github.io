@@ -681,13 +681,32 @@ function NewEvent(){
 	vCom = document.getElementById("display").getElementsByTagName("textarea")[0].value
 	vEve = document.getElementById("display").getElementsByTagName("input")[7].value
 	vDate = document.getElementById("display").getElementsByTagName("input")[8].value
-	vCol = document.querySelector('input[name="calicons"]:checked').getAttribute("id")
-	alert ('Event: '+vEve+"\n\rCom: "+vCom+"\n\rDate: "+vDate+"\n\rColor: "+vCol)
-}
+	vCor = document.querySelector('input[name="calicons"]:checked').getAttribute("id")
+//	alert ('Event: '+vEve+"\n\rCom: "+vCom+"\n\rDate: "+vDate+"\n\rColor: "+vCor)
 
-function TestGCAL(){
-	event = {"summary":"Google I/O 2015","description":"A chance to hear more about Google's developer products.","colorId":"5","start":{"date":"2016-03-04"},"end":{"date":"2016-03-05"}}
-	gapi.client.calendar.events().insert("primary", event).execute()
+	if(vEve&&vDate){
+		var tempDate = new Date(vDate.split("-")[0],Number(vDate.split("-")[1])-1,vDate.split("-")[2])
+		tempDate.setDate(+1)
+		var resource = {
+		  "summary": vEve,
+		  "colorId": EventIcons(vCor),
+		  "description": ((vCom)?vCom:""),
+		  "start": {
+			"date": vDate
+		  },
+		  "end": {
+			"date": tempDate.getFullYear()+"-"+('0'+(tempDate.GetMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)
+			}
+		  };
+		var request = gapi.client.calendar.events.insert({
+		  'calendarId': 'primary',
+		  'resource': resource
+		});
+		request.execute(function(resp) {
+		  alert(resp);
+		});
+	}
+
 }
 
 
