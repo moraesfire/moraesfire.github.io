@@ -483,10 +483,8 @@
           if (events.length > 0) {
             for (i = 0; i < events.length; i++) {
               var event = events[i];
-              var when = event.start.dateTime;
-              if (!when) {
-                when = event.start.date;
-              }
+              var when = event.start.date;
+			  when = when.split("-")[0]+(Number(when.split("-")[1])-1)+when.split("-")[2]
 			  Events[i] = [EventIcons(event.colorId),when,event.summary,event.description,event.id]
               //alert(event.summary + ' (' + when + ') ' + ((event.colorId)?event.colorId:'') + ' ' + event.description)
             }
