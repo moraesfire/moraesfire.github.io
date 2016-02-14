@@ -1001,11 +1001,15 @@ function refreshicon(type,data){
 	document.getElementById("newicon").setAttribute("class","fa fa-"+icon+" "+color)
 }
 
-</script>
-<script src="https://apis.google.com/js/client.js?onload=checkAuth">
+function Initiate(){
 RenderTasks()
+checkAuth()
 RenderCalendar()
+}
+
 </script>
+<script src="https://apis.google.com/js/client.js?onload=Initiate"></script>
+
 	<span class="clone" style="display:none;">
 	<div>
 		<span class="category">
