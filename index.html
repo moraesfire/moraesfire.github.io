@@ -413,7 +413,6 @@
 <span id="todo">
 </span>
 
-<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 <script>
 	Events = []
       var CLIENT_ID = '902405926255-9l2qshjqmhbap86vl78ui7cjbq9kgdg1.apps.googleusercontent.com';
@@ -1003,9 +1002,10 @@ function refreshicon(type,data){
 }
 
 RenderTasks()
-//checkAuth()
+checkAuth()
 RenderCalendar()
 </script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 	<span class="clone" style="display:none;">
 	<div>
 		<span class="category">
