@@ -624,7 +624,7 @@ function RenderCalendar(){
 		return ((tempDateA<tempDateB)?-1:((tempDateA>tempDateB?1:0)))
 	})
 	upcoming.forEach(function(element){
-		document.getElementById("display").innerHTML += "<span class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[element[1].split("-")[1]].slice(0,3)+"</span><span class='comment'>"+element[3]+"</span></span>"
+		document.getElementById("display").innerHTML += "<span class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><span class='comment'>"+element[3]+"</span></span>"
 	})
 
 	//Write Today?
