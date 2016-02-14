@@ -712,6 +712,16 @@ function NewEvent(){
 
 }
 
+function DeleteEvent(id){
+	var request = gapi.client.calendar.events.delete({
+	  'calendarId': 'primary',
+	  'eventId': id
+	});
+	request.execute(function(resp) {
+	  console.log(resp);
+	});
+	checkAuth()
+}
 
 function CalendarSetting(){
 	document.getElementById("display").innerHTML = ""
