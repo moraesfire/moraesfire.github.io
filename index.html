@@ -486,10 +486,11 @@
               var event = events[i];
               var when = event.start.date;
 			  when = when.split("-")[0]+"-"+("0"+(Number(when.split("-")[1])-1)).slice(-2)+"-"+when.split("-")[2]
-			  Events[i] = [EventIcons(event.colorId),when,event.summary,event.description,event.id]
-              //alert(event.summary + ' (' + when + ') ' + ((event.colorId)?event.colorId:'') + ' ' + event.description)
+			  Events[i] = [EventIcons(event.colorId),when,event.summary,((event.description)?event.description:),event.id]
             }
           }
+		  
+		  RenderCalendar()
 
         });
       }
@@ -1001,12 +1002,9 @@ function refreshicon(type,data){
 	document.getElementById("newicon").setAttribute("class","fa fa-"+icon+" "+color)
 }
 
+RenderTasks()
 </script>
 <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
-<script>
-RenderTasks()
-RenderCalendar()
-</script>
 
 	<span class="clone" style="display:none;">
 	<div>
