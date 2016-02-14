@@ -491,6 +491,8 @@
             }
           }
 		  
+		  RenderCalendar()
+		  
         });
       }
 
@@ -657,7 +659,8 @@ function ChangeMonth(c){
 		}
 		var tempDate = new Date()
 		if ((tempDate.getFullYear()==Year)&&(tempDate.getMonth()==Month)) localStorage.Month = ""
-		RenderCalendar()
+//		RenderCalendar()
+		checkAuth()
 	}
 }
 
@@ -673,7 +676,8 @@ function AddEvent(){
 	
 	document.getElementById("display").innerHTML += "<input type='date' value='"+tempDate.getFullYear()+"-"+("0"+(tempDate.getMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)+"'>"
 	document.getElementById("display").innerHTML += "<textarea rows='3' placeholder='Comments'></textarea>"
-	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+//	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="checkAuth()">CANCEL</span>'
 	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="NewEvent()">OK</span>'
 }
 
@@ -697,7 +701,8 @@ function CalendarSetting(){
 	Icons.forEach(function(element){
 		document.getElementById("display").innerHTML += "<i onclick='CalIcon(\""+element+"\")' class='fa fa-"+element+"'></i>"
 	})
-	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+//	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="checkAuth()">CANCEL</span>'
 	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="SaveCalIcons()">OK</span>'
 }
 
@@ -711,7 +716,8 @@ function SaveCalIcons(){
 		CalCat[i] = document.getElementById("CalCat").getElementsByTagName("input")[i].value
 	}
 	localStorage.CalCat = CalCat.join("|")
-	RenderCalendar()
+//	RenderCalendar()
+	checkAuth()
 }
 
 //Initiate Procedure
@@ -1005,7 +1011,7 @@ function refreshicon(type,data){
 
 RenderTasks()
 </script>
-<script src="https://apis.google.com/js/client.js?onload=RenderCalendar"></script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
 
 	<span class="clone" style="display:none;">
 	<div>
