@@ -592,7 +592,7 @@ function RenderCalendar(){
 	//Write Days
 	tempDate.setDate(tempDate.getDate()-tempDate.getDay())
 	for (i=0;i<(7*7);i++) {
-		document.getElementById("sheet").innerHTML += ("<span onclick='AddEvent("+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+")' id='"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
+		document.getElementById("sheet").innerHTML += ("<span onclick='AddEvent(\""+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"\")' id='"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
 		tempDate.setDate(tempDate.getDate()+1)
 	}
 		
@@ -679,7 +679,7 @@ function AddEvent(input){
 	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
 	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="NewEvent()">OK</span>'
 	
-	if ((typeof input == "string")&&(input.lentgh == 10)) document.getElementById("display").getElementsByTagName("input")[8].value = input
+	if ((typeof input == "string")&&(input.length == 10)) document.getElementById("display").getElementsByTagName("input")[8].value = input
 }
 
 function NewEvent(){
