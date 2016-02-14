@@ -21,7 +21,12 @@
 			color: #ecf0f1;
 		}
 		
-		#todo div{
+		#todo, #calendar{
+			float: left;
+			margin-right: 15px;
+		}
+		
+		#todo div, #calendar div{
 			background-color: #1f1f1f;
 			border-radius: 3px;
 			width: 400px;
@@ -65,11 +70,11 @@
 			color: #1f1f1f;
 		}
 		
-		.category:hover i:nth-of-type(2),  .task:hover i:nth-of-type(2), .task:hover i:nth-of-type(3){
+		.category:hover i:nth-of-type(2),  .task:hover i:nth-of-type(2), .task:hover i:nth-of-type(3), #sheet:hover #header i{
 			color:#333;
 		}
 		
-		.category i:nth-of-type(2):hover,  .task i:nth-of-type(2):hover, .addtask:hover, #catnew:hover, .task i:nth-of-type(3):hover{
+		.category i:nth-of-type(2):hover,  .task i:nth-of-type(2):hover, .addtask:hover, #catnew:hover, .task i:nth-of-type(3):hover, #sheet #header i:hover{
 			color:#ecf0f1;
 		}
 				
@@ -171,7 +176,7 @@
 		#formicons input[type="radio"] + label{
 			opacity: .2;
 			font-size: 24px;
-			font-align:center;
+			text-align:center;
 		}
 
 		#formicons input[type="radio"]:checked + label{
@@ -211,21 +216,293 @@
 			color: #ecf0f1;
 		}
 		
+		/*Calendar*/
+		
+		#header{
+			display:inline-block;
+			width:400px;
+			text-align: center;
+			font-size: 24px;
+			padding: 15px 0 10px;
+			position: relative;
+		}
+		
+		#header i{
+			font-size:16px;
+			position: absolute;
+			top: 23px;
+			color: transparent;
+		}
+		
+		#header i:nth-of-type(1){left:  25px}
+		#header i:nth-of-type(2){left:  60px}
+		#header i:nth-of-type(3){right: 60px}
+		#header i:nth-of-type(4){right: 25px}
+
+		#header label{
+			position: relative;
+			font-size: 14px;
+			top: -20px;
+			right: 30px;
+			opacity:0;
+		}
+		
+		#sheet:hover #header label{
+			opacity: .5;
+		}
+		
+		#week span{
+			text-align:center;
+			width: 56.5px;
+			display: inline-block;
+			font-size: 12px;
+			opacity: .8;
+			line-height: 30px;
+		}
+		
+		#sheet {
+			padding-bottom: 5px;
+		}
+		
+		#sheet span[date]{
+			width:50px;
+			height:50px;
+			border-radius: 50%;
+			display: inline-table;
+			margin: 3px 0 0 6px;
+			text-align:center;
+			line-height: 50px;
+			position:relative;
+		}
+		
+		#sheet span[date].event{
+			background: #111;
+		}
+		
+		#sheet span[date].event i{
+			font-size:36px;
+			position: relative;
+			top: 8px;
+		}
+
+		#sheet span[date].event.today i{
+			top: 6px;
+		}
+
+		#sheet span[date].event:after{
+			width:  24px;
+			height: 24px;
+			display: inline-table;
+			border-radius: 50%;
+			border: 2px solid #1f1f1f;
+			background: #111;
+			content: attr(date);
+			font-size: 12px;
+			position: absolute;
+			right:  -5px;
+			bottom: -5px;
+			line-height: 25px;
+		}
+		
+		#sheet span[date].today{
+			border: 2px solid #ecf0f1;
+			width:46px;
+			height:46px;
+			line-height: 46px;
+		}
+		
+		#sheet .off{
+			opacity: .25;
+		}
+		
+		#CalCat{
+			padding-top: 15px;
+		}
+		
+		#display form ~ i, #display form i{
+			display: inline-table;
+			width:  30px;
+			height: 30px;
+			border-radius:50%;
+			margin: 0 7px;
+			cursor: pointer;
+			font-size: 24px;
+			text-align:center;
+			line-height: 30px;
+		}
+		
+		#display input[type=radio]:checked + label i{
+//			border: 2px solid #1f1f1f;
+//			box-shadow: 0 0 0 2px #eef2f3;
+			opacity: 1;
+		}
+		
+		#display form ~ i, #display form i{
+			opacity: .2;
+		}
+
+		#display form ~ i:hover{
+			opacity: 1;
+		}
+		
+		#display .devent{
+			position: relative;
+			display: block;
+			padding: 10px 0 0 10px;
+		}
+		
+		#display .devent i{
+			width:30px;
+			height:30px;
+			display: inline-block;
+			font-size: 24px;
+		}
+		
+		#display .minicalendar{
+			position: absolute;
+			top:  8px;
+			left: 44px;
+			font-size: 8px;
+			opacity: .4;
+		}
+		
+		#display .comment{
+			margin: 0 0 15px 35px;
+			font-size: 12px;
+			display:block;
+			opacity: .65;
+		}
+		
+		#display textarea::-webkit-input-placeholder, #display input[type="text"]::-webkit-input-placeholder{
+			color: rgba(255,255,255,.2);
+		}
+		
+		#display input[type=date], #display textarea, #display textarea:focus{
+			font-family: Montserrat;
+			color:#ecf0f1;
+			background: transparent;
+			border: none;
+			outline: none;
+		}
+		
+		#display input[type=date]{
+			width: 140px;
+		}
+		
+		#display input[type=text][placeholder=Event]{
+			margin-left: 27px;
+			width: 230px;
+		}
+		
+		#display textarea{
+			width: 350px;
+			max-width: 350px;
+			margin-left: 25px;
+		}
+		
 	</style>
 
 </head>
 
 <body>
 
-<!--  <i class="fa fa-eye fa-5x"></i> -->
-
-<div id="calendar">
-</div>
+<span id="calendar">
+</span>
 
 <span id="todo">
 </span>
 
 <script>
+      // Your Client ID can be retrieved from your project in the Google
+      // Developer Console, https://console.developers.google.com
+      var CLIENT_ID = '902405926255-9l2qshjqmhbap86vl78ui7cjbq9kgdg1.apps.googleusercontent.com';
+
+      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
+
+      /**
+       * Check if current user has authorized this application.
+       */
+      function checkAuth() {
+        gapi.auth.authorize(
+          {
+            'client_id': CLIENT_ID,
+            'scope': SCOPES.join(' '),
+            'immediate': true
+          }, handleAuthResult);
+      }
+
+      /**
+       * Handle response from authorization server.
+       *
+       * @param {Object} authResult Authorization result.
+       */
+      function handleAuthResult(authResult) {
+//      var authorizeDiv = document.getElementById('authorize-div');
+        if (authResult && !authResult.error) {
+          // Hide auth UI, then load client library.
+//        authorizeDiv.style.display = 'none';
+          loadCalendarApi();
+        } else {
+          // Show auth UI, allowing the user to initiate authorization by
+          // clicking authorize button.
+//          authorizeDiv.style.display = 'inline';
+        }
+      }
+
+      /**
+       * Initiate auth flow in response to user clicking authorize button.
+       *
+       * @param {Event} event Button click event.
+       */
+      function handleAuthClick(event) {
+        gapi.auth.authorize(
+          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+          handleAuthResult);
+        return false;
+      }
+
+      /**
+       * Load Google Calendar client library. List upcoming events
+       * once client library is loaded.
+       */
+      function loadCalendarApi() {
+        gapi.client.load('calendar', 'v3', listUpcomingEvents);
+      }
+
+      /**
+       * Print the summary and start datetime/date of the next ten events in
+       * the authorized user's calendar. If no events are found an
+       * appropriate message is printed.
+       */
+      function listUpcomingEvents() {
+        var request = gapi.client.calendar.events.list({
+          'calendarId': 'primary',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'orderBy': 'startTime'
+        });
+
+        request.execute(function(resp) {
+          var events = resp.items;
+
+          if (events.length > 0) {
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+              alert(event.summary + ' (' + when + ')')
+            }
+          } else {
+            alert('No upcoming events found.');
+          }
+
+        });
+      }
+	  
+
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id.slice(-3));
 //	alert(ev.target.id.slice(-3))
@@ -235,10 +512,190 @@ function allowDrop(ev) {
 }
 function drop(ev) {
     ev.preventDefault();
-	SwapCategories(Number(ev.dataTransfer.getData("text")),Number(ev.target.id.slice(-3)))
+	if(!isNaN(ev.target.id.slice(-3))) SwapCategories(Number(ev.dataTransfer.getData("text")),Number(ev.target.id.slice(-3)))
 //	alert(ev.target.id.slice(-3))
 }
 
+function RenderCalendar(){
+	document.getElementById("calendar").innerHTML = ""
+	
+	Months=["January","February","March","April","May","June","July","August","September","October","November","December"]
+	
+	//#############################
+	// SET UP CATEGORIES
+	//#############################
+	
+	//Calendar Categories:
+	//["White/Other","Yellow","Orange","Red","Purple","Blue","Green"]
+	
+	CalCat = []
+	temp = localStorage.CalCat
+	if (!temp) {
+		CalCat=["asterisk","star","briefcase","gift","plane","gamepad","leaf"]
+	} else {
+		CalCat=temp.split("|")
+	}	
+
+	//#############################
+	// SET UP EVENTS
+	//#############################
+	
+	//Events:
+	//[0]: Color
+	//[1]: Date
+	//[2]: Name
+	//[3]: Comment
+	
+	Events = [[1,"2016 2 6","Test","22h"],[0,"2016 0 31","Test","10h - Bring Beer"],[1,"2016 2 19","Test","???"],[2,"2016 1 15","Test","10h - Bring Beer"],[3,"2016 1 15","Birthday",""],[Math.floor(Math.random()*7),"2016 1 10","Birthday",""],[5,"2016 1 25","Smash Bros",""],[6,"2016 2 8","GreenPeace",""],[0,"2016 1 5","ABC","???"]]
+	
+	//#############################
+	// WRITE CALENDAR
+	//#############################
+
+	//Check Displaying Month
+	if (localStorage.Month) var tempDate = new Date(localStorage.Month.split(" ")[0],localStorage.Month.split(" ")[1],01)
+	else {
+		var tempDate = new Date()
+		tempDate.setDate(1)
+	}
+	
+	Month = tempDate.getMonth()
+	Year = tempDate.getFullYear()
+	
+	//Create Calendar Sheet& Display
+	document.getElementById("calendar").innerHTML += "<div id='sheet'></div><div id='display'></div>"
+	
+	//Write Header
+	document.getElementById("sheet").innerHTML += "<span id='header'><i onclick='ChangeMonth(0)' class='fa fa-refresh'></i><i class='fa fa-cog' onclick='CalendarSetting()'></i>"+Months[Month]+"<label>"+Year+"</label><i onclick='ChangeMonth(-1)' class='fa fa-chevron-left'></i><i onclick='ChangeMonth(1)' class='fa fa-chevron-right'></i></span>"
+	document.getElementById("sheet").innerHTML += "<span id='week'><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></span>"
+	
+	//Write Days
+	tempDate.setDate(tempDate.getDate()-tempDate.getDay())
+	for (i=0;i<(7*7);i++) {
+		document.getElementById("sheet").innerHTML += ("<span id='"+tempDate.getFullYear()+" "+tempDate.getMonth()+" "+tempDate.getDate()+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
+		tempDate.setDate(tempDate.getDate()+1)
+	}
+		
+	//Write Events
+	Colors = ["white","yellow","orange","red","purple","blue","green"]
+	tfirst = document.getElementById("sheet").getElementsByTagName("span")[9].getAttribute("id")
+	tlast  = document.getElementById("sheet").getElementsByTagName("span")[document.getElementById("sheet").getElementsByTagName("span").length-1].getAttribute("id")
+	var DateFirst = new Date(tfirst.split(" ")[0],tfirst.split(" ")[1],tfirst.split(" ")[2])
+	var DateLast = new Date(tlast.split(" ")[0],tlast.split(" ")[1],tlast.split(" ")[2])
+	var today = new Date()
+	today.setHours(0)
+	today.setMinutes(0)
+	today.setSeconds(0)
+	today.setMilliseconds(0)
+	
+	upcoming = []
+	
+	Events.forEach(function(element, index){
+		//check if they display on the current calendar sheet
+		var tempDate = new Date(element[1].split(" ")[0],element[1].split(" ")[1],element[1].split(" ")[2])
+		if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
+			document.getElementById(element[1]).innerHTML = "<i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i>"
+			if(document.getElementById(element[1]).getAttribute("class").indexOf("event")<0)document.getElementById(element[1]).setAttribute("class",document.getElementById(element[1]).getAttribute("class")+" event")
+		}
+		//Upcoming Events (next 30 days)
+		if((tempDate.getTime()>=today.getTime())&&(tempDate.getTime()<=(today.getTime()+31*24*60*60*1000))){
+			upcoming.push(element)
+		}
+	})
+	
+	//Write upcoming event
+	upcoming.sort(function(a,b){
+		var tempDateA = new Date(a[1].split(" ")[0],a[1].split(" ")[1],a[1].split(" ")[2])
+		var tempDateB = new Date(b[1].split(" ")[0],b[1].split(" ")[1],b[1].split(" ")[2])
+		return ((tempDateA<tempDateB)?-1:((tempDateA>tempDateB?1:0)))
+	})
+	upcoming.forEach(function(element){
+		document.getElementById("display").innerHTML += "<span class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split(" ")[2]+"/"+Months[element[1].split(" ")[1]].slice(0,3)+"</span><span class='comment'>"+element[3]+"</span></span>"
+	})
+
+	//Write Today?
+	var tempDate= new Date()
+	var DateFirst = new Date(tfirst.split(" ")[0],tfirst.split(" ")[1],tfirst.split(" ")[2])
+	var DateLast = new Date(tlast.split(" ")[0],tlast.split(" ")[1],tlast.split(" ")[2])
+	if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
+		document.getElementById(tempDate.getFullYear()+" "+tempDate.getMonth()+" "+tempDate.getDate()).setAttribute("class",document.getElementById(tempDate.getFullYear()+" "+tempDate.getMonth()+" "+tempDate.getDate()).getAttribute("class")+" today")
+	}	
+}
+
+function ChangeMonth(c){
+	if (((c==1)||(c==-1))||(c==0)){
+		if(c==0){
+			localStorage.Month = ""
+		} else {
+			Month = Month + c
+			if(Month>11){
+				Month=0
+				Year++
+			}
+			if(Month<0){
+				Month=11
+				Year--
+			}
+			localStorage.Month = Year + " " +Month
+		}
+		var tempDate = new Date()
+		if ((tempDate.getFullYear()==Year)&&(tempDate.getMonth()==Month)) localStorage.Month = ""
+		RenderCalendar()
+	}
+}
+
+function AddEvent(){
+	document.getElementById("display").innerHTML = ""
+	document.getElementById("display").innerHTML += "<form id='CalCat'></form>"
+	CalCat.forEach(function(element,index){
+		document.getElementById("CalCat").innerHTML += "<input type='radio' name='calicons'id='c"+index+"' value='"+element+"' "+((!index)?"checked":"")+"> <label id='l"+index+"' for='c"+index+"'><i class='fa "+Colors[index]+" fa-"+element+"'></i></label>"
+	})
+	document.getElementById("display").innerHTML += "<input type='text' placeholder='Event'>"
+	
+	var tempDate = new Date()
+	
+	document.getElementById("display").innerHTML += "<input type='date' value='"+tempDate.getFullYear()+"-"+("0"+(tempDate.getMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)+"'>"
+	document.getElementById("display").innerHTML += "<textarea rows='3' placeholder='Comments'></textarea>"
+	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="NewEvent()">OK</span>'
+}
+
+function NewEvent(){
+	vCom = document.getElementById("display").getElementsByTagName("textarea")[0].value
+	vEve = document.getElementById("display").getElementsByTagName("input")[7].value
+	vDate = document.getElementById("display").getElementsByTagName("input")[8].value
+	vCol = document.querySelector('input[name="calicons"]:checked').getAttribute("id")
+	alert ('Event: '+vEve+"\n\rCom: "+vCom+"\n\rDate: "+vDate+"\n\rColor: "+vCol)
+}
+
+
+function CalendarSetting(){
+	document.getElementById("display").innerHTML = ""
+	document.getElementById("display").innerHTML += "<form id='CalCat'></form>"
+	CalCat.forEach(function(element,index){
+		document.getElementById("CalCat").innerHTML += "<input type='radio' name='calicons'id='c"+index+"' value='"+element+"' "+((!index)?"checked":"")+"> <label id='l"+index+"' for='c"+index+"'><i class='fa "+Colors[index]+" fa-"+element+"'></i></label>"
+	})
+	Icons = "star asterisk birthday-cake cloud-download coffee cog comments-o dollar eye futbol-o gamepad gift globe graduation-cap heart leaf music paint-brush paper-plane paw plane pencil power-off puzzle-piece quote-left rocket ambulance automobile bicycle bus fighter-jet motorcycle ship android apple calculator user camera camera-retro clock-o desktop facebook-square feed file floppy-o folder-o font headphones laptop mobile wifi briefcase credit-card-alt gavel line-chart money suitcase balance-scale beer binoculars bomb book calendar calendar-o chain check cutlery envelope-o exclamation-triangle female film fire flag-o flash flask fort-awesome glass group home lightbulb-o lock male map-marker random sticky-note ticket tree trophy"
+	Icons = Icons.split(" ")
+	Icons.forEach(function(element){
+		document.getElementById("display").innerHTML += "<i onclick='CalIcon(\""+element+"\")' class='fa fa-"+element+"'></i>"
+	})
+	document.getElementById("display").innerHTML += '<span id="cancelbtn" onclick="RenderCalendar()">CANCEL</span>'
+	document.getElementById("display").innerHTML += '<span id="okbtn" onclick="SaveCalIcons()">OK</span>'
+}
+
+function CalIcon(icon){
+	document.querySelector('input[name="calicons"]:checked').value = icon
+	document.getElementById("l"+document.querySelector('input[name="calicons"]:checked').getAttribute("id").slice(1)).innerHTML = "<i class='fa "+Colors[document.querySelector('input[name="calicons"]:checked').getAttribute("id").slice(1)]+" fa-"+icon+"'></i>"
+}
+
+function SaveCalIcons(){
+	for(i=0;i<7;i++){
+		CalCat[i] = document.getElementById("CalCat").getElementsByTagName("input")[i].value
+	}
+	localStorage.CalCat = CalCat.join("|")
+	RenderCalendar()
+}
 
 //Initiate Procedure
 function RenderTasks(){
@@ -515,6 +972,7 @@ function SwapCategories(a,b){
 function ToggleMinimize(index){
 	if  (document.getElementById("cat"+("00"+index).slice(-3)).getElementsByClassName("category")[0].getAttribute("Minimized")) document.getElementById("cat"+("00"+index).slice(-3)).getElementsByClassName("category")[0].setAttribute("Minimized","")
 	else document.getElementById("cat"+("00"+index).slice(-3)).getElementsByClassName("category")[0].setAttribute("Minimized","yes")
+	SaveTasks()
 }
 
 function refreshicon(type,data){
@@ -529,6 +987,7 @@ function refreshicon(type,data){
 }
 
 RenderTasks()
+RenderCalendar()
 </script>
 
 	<span class="clone" style="display:none;">
