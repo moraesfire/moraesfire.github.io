@@ -491,8 +491,6 @@
             }
           }
 		  
-		  RenderCalendar()
-
         });
       }
 
@@ -536,6 +534,8 @@ function drop(ev) {
 function RenderCalendar(){
 	document.getElementById("calendar").innerHTML = ""
 	
+	checkAuth()
+
 	Months=["January","February","March","April","May","June","July","August","September","October","November","December"]
 	
 	//#############################
