@@ -562,7 +562,7 @@ function RenderCalendar(){
 	//[2]: Name
 	//[3]: Comment
 	
-//	Events = [[1,"2016 2 6","Test","22h"],[0,"2016 0 31","Test","10h - Bring Beer"],[1,"2016 2 19","Test","???"],[2,"2016 1 15","Test","10h - Bring Beer"],[3,"2016 1 15","Birthday",""],[Math.floor(Math.random()*7),"2016 1 10","Birthday",""],[5,"2016 1 25","Smash Bros",""],[6,"2016 2 8","GreenPeace",""],[0,"2016 1 5","ABC","???"]]
+//	Events = [[1,"2016-02-06","Test","22h"],[0,"2016 0 31","Test","10h - Bring Beer"],[1,"2016 2 19","Test","???"],[2,"2016 1 15","Test","10h - Bring Beer"],[3,"2016 1 15","Birthday",""],[Math.floor(Math.random()*7),"2016 1 10","Birthday",""],[5,"2016 1 25","Smash Bros",""],[6,"2016 2 8","GreenPeace",""],[0,"2016 1 5","ABC","???"]]
 	
 	//#############################
 	// WRITE CALENDAR
@@ -588,7 +588,7 @@ function RenderCalendar(){
 	//Write Days
 	tempDate.setDate(tempDate.getDate()-tempDate.getDay())
 	for (i=0;i<(7*7);i++) {
-		document.getElementById("sheet").innerHTML += ("<span id='"+tempDate.getFullYear()+" "+tempDate.getMonth()+" "+tempDate.getDate()+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
+		document.getElementById("sheet").innerHTML += ("<span id='"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
 		tempDate.setDate(tempDate.getDate()+1)
 	}
 		
