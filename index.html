@@ -705,6 +705,9 @@ function NewEvent(){
 		request.execute(function(resp) {
 		  console.log(resp);
 		});
+		checkAuth()
+	} else {
+		alert("Event name or date not valid.")
 	}
 
 }
