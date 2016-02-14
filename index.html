@@ -416,7 +416,6 @@
 </span>
 
 <script>
-	Events = []
       var CLIENT_ID = '902405926255-9l2qshjqmhbap86vl78ui7cjbq9kgdg1.apps.googleusercontent.com';
 
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
@@ -482,6 +481,8 @@
 
         request.execute(function(resp) {
           var events = resp.items;
+		  
+		  Events=[]
 
           if (events.length > 0) {
             for (i = 0; i < events.length; i++) {
