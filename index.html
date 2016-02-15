@@ -602,7 +602,7 @@ function RenderCalendar(){
 	//Write Events
 	Colors = ["white","yellow","orange","red","purple","blue","green"]
 	tfirst = document.getElementById("sheet").getElementsByTagName("span")[9].getAttribute("id")
-	tlast  = document.getElementById("sheet").getElementsByTagName("span")[document.getElementById("sheet").getElementsByTagName("span").length-1].getAttribute("id")
+	tlast  = document.getElementById("sheet").getElementsByTagName("span")[document.getElementById("sheet").getElementsByTagName("span").length-2].getAttribute("id")
 	var DateFirst = new Date(tfirst.split("-")[0],tfirst.split("-")[1],tfirst.split("-")[2])
 	var DateLast = new Date(tlast.split("-")[0],tlast.split("-")[1],tlast.split("-")[2])
 	var today = new Date()
