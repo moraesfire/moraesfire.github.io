@@ -709,11 +709,18 @@ function NewEvent(id){
 			"date": tempDate.getFullYear()+"-"+('0'+(tempDate.getMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)
 			}
 		  };
-		if (id) resource.eventId = id
-		var request = gapi.client.calendar.events.insert({
-		  'calendarId': 'primary',
-		  'resource': resource
-		});
+		if (id) {
+			var request = gapi.client.calendar.events.update({
+			  'calendarId': 'primary',
+			  'resource': resource,
+			  'eventId': id
+			});
+		} else {
+			var request = gapi.client.calendar.events.insert({
+			  'calendarId': 'primary',
+			  'resource': resource
+			});
+		}
 		request.execute(function(resp) {
 		  console.log(resp);
 		});
