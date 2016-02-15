@@ -629,8 +629,8 @@ function RenderCalendar(){
 		var tempDateB = new Date(b[1].split("-")[0],b[1].split("-")[1],b[1].split("-")[2])
 		return ((tempDateA<tempDateB)?-1:((tempDateA>tempDateB?1:0)))
 	})
-	upcoming.forEach(function(element,index){
-		document.getElementById("display").innerHTML += "<span onclick='AddEvent(\""+index+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>"
+	upcoming.forEach(function(element){
+		document.getElementById("display").innerHTML += "<span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>"
 	})
 
 	//Write Today?
