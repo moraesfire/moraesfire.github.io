@@ -335,8 +335,6 @@
 		}
 		
 		#display input[type=radio]:checked + label i{
-//			border: 2px solid #1f1f1f;
-//			box-shadow: 0 0 0 2px #eef2f3;
 			opacity: 1;
 		}
 		
@@ -348,25 +346,31 @@
 			opacity: 1;
 		}
 		
-		#display .devent{
+<!--		#display .devent{
+-->
+		.devent{
 			position: relative;
 			display: block;
 			padding: 10px 0 0 10px;
 		}
 		
-		#display .devent i{
+<!--		#display .devent i{
+-->		.devent i{
 			width:30px;
 			height:30px;
 			display: inline-block;
 			font-size: 24px;
 		}
 		
-		#display .devent i:nth-of-type(2){
+<!--		#display .devent i:nth-of-type(2){
+-->
+		.devent i:nth-of-type(2){
 			font-size: 18px;
 			top: 10px;
 		}
 		
-		#display .minicalendar{
+<!--		#display .minicalendar{
+-->		.minicalendar{
 			position: absolute;
 			top:  8px;
 			left: 44px;
@@ -374,7 +378,7 @@
 			opacity: .4;
 		}
 		
-		#display .comment{
+		#display .comment, #sheet .comment{
 			margin: 0 0 15px 35px;
 			font-size: 12px;
 			display:block;
@@ -621,7 +625,7 @@ function RenderCalendar(){
 		if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
 			if(document.getElementById(element[1]).innerHTML.indexOf("<i")<0) document.getElementById(element[1]).innerHTML = "<i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i>"
 			if(document.getElementById(element[1]).getAttribute("class").indexOf("event")<0)document.getElementById(element[1]).setAttribute("class",document.getElementById(element[1]).getAttribute("class")+" event")
-			document.getElementById(element[1]).innerHTML += "<span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>"
+			document.getElementById(element[1]).innerHTML += ("<span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>")
 		}
 		//Upcoming Events (next 30 days)
 		if((tempDate.getTime()>=today.getTime())&&(tempDate.getTime()<=(today.getTime()+31*24*60*60*1000))){
