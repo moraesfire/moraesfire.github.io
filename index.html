@@ -411,7 +411,22 @@
 			position: relative;
 			top: 10px;
 			width: 400px;
-			background: red;
+			background: rgba(0,0,0,.2);
+			display: none;
+		}
+		
+		.popup:before {
+			content: "";
+			display: none;
+			background: transparent;
+			width: 400px;
+			height: 15px;
+			position: relative;
+			top: -15px;
+		}
+		
+		span[date]:hover+.popup, .popup:hover, span[date]:hover+.popup:before, .popup:hover:before {
+			display: block;
 		}
 		
 	</style>
