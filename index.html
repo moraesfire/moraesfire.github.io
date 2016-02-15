@@ -363,7 +363,7 @@
 		
 		#display .devent i:nth-of-type(2){
 			font-size: 18px;
-			top: 3px;
+			top: 10px;
 		}
 		
 		#display .minicalendar{
@@ -619,8 +619,9 @@ function RenderCalendar(){
 		//check if they display on the current calendar sheet
 		var tempDate = new Date(element[1].split("-")[0],element[1].split("-")[1],element[1].split("-")[2])
 		if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
-			document.getElementById(element[1]).innerHTML = "<i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i>"
+			if(document.getElementById(element[1]).innerHTML.indexOf("<i")<0) document.getElementById(element[1]).innerHTML = "<i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i>"
 			if(document.getElementById(element[1]).getAttribute("class").indexOf("event")<0)document.getElementById(element[1]).setAttribute("class",document.getElementById(element[1]).getAttribute("class")+" event")
+			document.getElementById(element[1]).innerHTML += "<span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>"
 		}
 		//Upcoming Events (next 30 days)
 		if((tempDate.getTime()>=today.getTime())&&(tempDate.getTime()<=(today.getTime()+31*24*60*60*1000))){
