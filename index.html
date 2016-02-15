@@ -689,7 +689,7 @@ function AddEvent(input){
 	}
 }
 
-function NewEvent(){
+function NewEvent(id){
 	vCom = document.getElementById("display").getElementsByTagName("textarea")[0].value
 	vEve = document.getElementById("display").getElementsByTagName("input")[7].value
 	vDate = document.getElementById("display").getElementsByTagName("input")[8].value
@@ -709,6 +709,7 @@ function NewEvent(){
 			"date": tempDate.getFullYear()+"-"+('0'+(tempDate.getMonth()+1)).slice(-2)+"-"+("0"+tempDate.getDate()).slice(-2)
 			}
 		  };
+		if (id) resource.eventId = id
 		var request = gapi.client.calendar.events.insert({
 		  'calendarId': 'primary',
 		  'resource': resource
