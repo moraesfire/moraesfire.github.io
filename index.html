@@ -595,7 +595,7 @@ function RenderCalendar(){
 	//Write Days
 	tempDate.setDate(tempDate.getDate()-tempDate.getDay())
 	for (i=0;i<(7*7);i++) {
-		document.getElementById("sheet").innerHTML += ("<span onclick='AddEvent(\""+tempDate.getFullYear()+"-"+('0'+(tempDate.getMonth()+1)).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"\")' id='"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span>")
+		document.getElementById("sheet").innerHTML += ("<span onclick='AddEvent(\""+tempDate.getFullYear()+"-"+('0'+(tempDate.getMonth()+1)).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"\")' id='"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"' class='"+(((tempDate.getMonth()==Month)&&(tempDate.getFullYear()==Year))?"":"off")+"' date='"+tempDate.getDate()+"'>"+tempDate.getDate()+"</span><span class='popup' id='popup"+tempDate.getFullYear()+"-"+('0'+tempDate.getMonth()).slice(-2)+"-"+('0'+tempDate.getDate()).slice(-2)+"'></span>")
 		tempDate.setDate(tempDate.getDate()+1)
 	}
 		
@@ -619,7 +619,7 @@ function RenderCalendar(){
 		if((tempDate.getTime()>=DateFirst.getTime())&&(tempDate.getTime()<=DateLast.getTime())){
 			if(document.getElementById(element[1]).innerHTML.indexOf("<i")<0) document.getElementById(element[1]).innerHTML = "<i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i>"
 			if(document.getElementById(element[1]).getAttribute("class").indexOf("event")<0)document.getElementById(element[1]).setAttribute("class",document.getElementById(element[1]).getAttribute("class")+" event")
-			document.getElementById(element[1]).innerHTML += ("</span><span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span>")
+			document.getElementById("popup"+element[1]).innerHTML += ("<span onclick='AddEvent(\""+Events.indexOf(element)+"\")' class='devent'><i class='fa "+Colors[element[0]]+" fa-"+CalCat[element[0]]+"'></i> "+element[2]+"<span class='minicalendar'>"+element[1].split("-")[2]+"/"+Months[Number(element[1].split("-")[1])].slice(0,3)+"</span><i class='fa fa-trash' onclick='DeleteEvent(\""+element[4]+"\")'></i><span class='comment'>"+element[3]+"</span></span>")
 		}
 		//Upcoming Events (next 30 days)
 		if((tempDate.getTime()>=today.getTime())&&(tempDate.getTime()<=(today.getTime()+31*24*60*60*1000))){
