@@ -683,7 +683,7 @@ function AddEvent(input){
 	if (typeof input == "object"){
 		document.getElementById("display").getElementsByTagName("textarea")[0].value = input[3]
 		document.getElementById("display").getElementsByTagName("input")[7].value = input[2]
-		document.getElementById("display").getElementsByTagName("input")[8].value = input[1].split("-")[0]+"-"+("0"+(Number(input[1].split("-"))+1)).slice(-2)+"-"+("0"+input[1].split("-")[2]).slice(-2)
+		document.getElementById("display").getElementsByTagName("input")[8].value = input[1].split("-")[0]+"-"+("0"+(Number(input[1].split("-")[1])+1)).slice(-2)+"-"+("0"+input[1].split("-")[2]).slice(-2)
 		document.getElementById("CalCat").getElementsByTagName("input")[input[0]].checked = true
 		document.getElementById("okbtn").setAttribute("onclick","NewEvent('"+input[4]+"')")
 	}
