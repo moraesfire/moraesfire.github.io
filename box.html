@@ -1,0 +1,693 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Board Game Box</title>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+	<!--https://anseki.github.io/plain-modal/-->
+	<script src="https://cdn.jsdelivr.net/npm/plain-modal@1.0.34/plain-modal.min.js"></script>
+
+	<script src="games.js"></script>
+	<script src="like.js"></script>
+	<script src="top10k.js"></script>
+	
+    <style>
+        body {
+			background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/bright_squares.png");
+			padding-top: 75px;
+            margin: 0;
+
+			font-family: "Montserrat", sans-serif;
+            background-color: #f0f0f0;
+			color: #1d1d1d;
+        }
+
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(0deg) rotateY(12deg);
+            transition: transform 0.5s;
+			margin: 25px;
+			box-shadow: 0 12px 10px rgba(0,0,0,.5);
+			cursor: pointer;
+        }
+
+        .box:hover {
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateX(-10px);
+        }
+		
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,.5);
+			background-size: cover;
+			border-radius: 3px;
+			background-image: inherit;
+        }
+
+		.front{
+			background-position: top;
+			box-shadow: inset 0 0px 2px 1px rgba(255, 255, 255, .15);
+		}
+
+        .left {
+            width: 25px;
+            height: 200px;
+            transform: rotateY(-90deg) translateZ(13px) translateX(-81px) scaleX(6);
+			filter: brightness(0.5);
+        }
+
+		.hidden{visibility: hidden;}
+
+		.box:hover .hidden{
+			visibility: visible;
+		}
+		
+		.score{
+			color: #27ae60;
+			position: absolute;
+			top: -2px;
+			right: 4px;
+			text-shadow: 0 2px 3px black;
+		}
+
+		.score:after{
+			color: white;
+			content: attr(score);
+			font-size: 16px;
+			position: absolute;
+			top: 14px;
+			right: 0px;
+			text-shadow: 0 2px black;
+			font-family: "Montserrat", sans-serif;
+			font-weight: 500;
+			width: 36px;
+			text-align: center;
+		} 
+		
+		.gameHolder{
+			height: 300px;
+			position: relative;
+		}
+		
+		.gameholder:after{
+//			content: calc("\f2c9" + attr(score));
+			content: attr(score);
+			position:absolute;bottom:111px;right:25px;background:#1d1d1d;padding:4px 10px;border-radius: 3px;color:white; font-weight:bold;
+		}
+		
+		.year{
+			position:absolute;bottom:5px;right:-5px;background:#1d1d1d;padding:4px 10px;border-radius: 3px;color:white; font-weight:bold;
+		}
+		
+		.rank{
+			position:absolute;bottom:5px;left:-3px;background:#1d1d1d;padding:4px 10px;border-radius: 3px;color:white; font-weight:bold;
+		}
+
+		.rank:before{
+			font-family: "Font Awesome 6 Free";
+			font-weight: 900; /* For solid icons */
+			content: "\f521";
+			color: #f39c12;
+			padding-right: 10px;
+		}
+		
+		.name{
+			position:absolute;width:200px;top:245px;left:15px;font-weight:bold;text-align:center;
+		}
+		
+		.like{
+			position: absolute;
+			top:5px;
+			left:5px;
+			color:#f39c12;
+		}
+		
+		.like .fa-solid.fa-star,
+		.like .fa-regular.fa-star{
+			display:none;
+		}
+
+		.box:hover .like .fa-regular.fa-star{
+			display:block;
+		}
+
+		.like:hover .fa-solid.fa-star{
+			display: block;
+		}
+
+		.box .like:hover .fa-regular.fa-star{
+			display:none;
+		}
+
+		#header{
+			width:100%;
+			height: 75px;
+			background: #eee;
+			box-shadow: 0 2px 5px rgba(0,0,0,.2);
+			position:fixed;
+			top:0;
+			z-index:1;
+			display:flex;
+            justify-content: center;
+            align-items: center;
+		}
+
+		#main{
+			width:100%;
+			display: flex;
+			flex-wrap: wrap;
+            justify-content: center;
+		}
+
+		.btn{
+			float:right;
+			width: 50px;
+			height: 50px;
+			background-color: #ccc;
+			font-size: 24px;
+			display: flex;
+            justify-content: center;
+            align-items: center;
+			margin: 10px 5px;
+			border-radius: 3px;
+			cursor: pointer;
+			opacity:.5;
+		}
+		
+		.btn.active{
+			opacity:1;
+		}
+		
+		#btnholder{
+			position: absolute;
+			right:0;
+		}
+		
+		.search{
+			border: none;
+			width: 400px;
+			height: 35px;
+			border-radius: 5px;
+			padding-left: 35px;
+			font-family: 'Montserrat';
+			font-size: 14px;
+			font-weight: 550;
+			opacity: .5;
+		}
+
+		.search:focus {
+		  border: none;
+		  outline: none;
+		  opacity: 1;
+		}		
+		
+		 .inputwrap {
+			position: relative;
+		  }
+
+		.inputwrap:before {
+			content: "\f002";
+			font-family: "Font Awesome 6 Free";
+			font-weight: 900; /* For solid icons */
+			position: absolute;
+			left: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		
+		#games,
+		#mechs,
+		#cats{
+			width:100%;
+			background: rgba(0,0,0,.3);
+			line-height: 30px;
+			text-align: left;
+			display:none;
+		}
+		  
+		#games:before,
+		#mechs:before,
+		#cats:before{
+			content: attr(name);
+			padding-left: 10px;
+			padding-right: 15px;
+			font-weight:500;
+		}
+		  
+		.tag{
+			background: rgba(0, 0, 0, .35);
+			padding: 0px 15px;
+			border-radius: 15px;
+			color: white;
+			font-weight: 500;
+			margin: 5px;
+			display: inline-block;
+		}
+		
+		.tag:hover{
+			background: #eee;
+			color: #333;
+			cursor:pointer;
+		}
+		
+		#infoModal,
+		#filterModal{
+			width: 60%;
+			max-height: 80%;
+			background-color: #eee;
+			box-shadow: 0 0 5px;
+			line-height: 30px;
+			padding: 25px;
+			border-radius: 15px;
+			overflow-y: auto;
+			text-align: center;
+			position: relative;
+		}
+
+		#infoModal{
+			overflow-y: unset;
+		}
+
+		#infoModal .tag{
+			padding: 5px 15px;
+		}
+		
+		#infoModal .tag,
+		#filterModal .tag{
+			background: rgba(0,0,0,.65);
+		}
+		#infoModal .tag:hover,
+		#filterModal .tag:hover{
+			background: white;
+		}
+		
+		#infoMechs, #infoCats, #infoDesc{
+			padding: 15px 0;
+		}
+		
+		#infoName{
+			font-size: 32px;
+			font-weight: 700;
+			padding-top: 20px;
+		}
+		
+		#infoDesc{
+			padding-bottom: 25px;
+		}
+		
+		.infoTitle{
+			width:100%;
+			background-color: rgba(0,0,0,.25);
+			border-radius: 3px;
+			text-align: center;
+			padding: 5px;
+			font-weight: 700;
+		}
+		
+		#infoMechs,#infoCats{
+			text-align:center;
+		}
+		
+		#infoPlayers:before,
+		#infoTime:before,
+		#infoAge:before,
+		#infoWeight:before{
+			font-family: "Font Awesome 6 Free";
+			font-weight: 900; /* For solid icons */
+		}
+
+		#infoPlayers:before{content:"\f0c0"}
+		#infoTime:before{content:"\f252"}
+		#infoAge:before{content:"\e4e1"}
+		#infoWeight:before{content:"\f24e"}
+
+		#infoPlayers:after{content:" Players"}
+		#infoTime:after{content:" Mins"}
+		#infoAge:after{content:"+ Years"}
+    </style>
+</head>
+<body>
+<div id="header">
+	<span class="inputwrap"><input type="search" class="search" id="search" oninput="filterGames()"></span>
+
+	<div id="btnholder">
+		<div class="btn" onclick="loadUser()"><i class="fa-solid fa-user-astronaut"></i></div>
+		<div class="btn" onclick="modal.open()"><i class="fa-solid fa-tag"></i></div>
+		<div class="btn" sort="false" onclick="sortGames('weight',this.getAttribute('sort'),this)"><i class="fa-solid fa-scale-balanced"></i></div>
+		<div class="btn" sort="false" onclick="sortGames('year',this.getAttribute('sort'),this)"><i class="fa-regular fa-calendar"></i></div>
+		<div class="btn" sort="true" onclick="sortGames('name',this.getAttribute('sort'),this)"><i class="fa-solid fa-font"></i></div>
+		<div class="btn" sort="false" onclick="sortGames('score',this.getAttribute('sort'),this)"><i class="fa-solid fa-bookmark"></i></div>
+		<div class="btn active" sort="false" onclick="sortGames('rank',this.getAttribute('sort'),this)"><i class="fa-solid fa-crown"></i></div>
+<!--	<div class="btn"><i class="fa-solid fa-fire"></i></div>   -->
+	</div>
+</div>
+<div id="games" name="Similar to:"></div>
+<div id="mechs" name="Mechanics:"></div>
+<div id="cats" name="Categories:"></div>
+<div id="main"></div>
+
+<div id="filterModal">
+	<span class="inputwrap"><input type="search" class="search" id="searchTag" oninput="filterTags()"></span>
+</div>
+
+<div id="infoModal">
+
+
+<table>
+<tbody>
+	<tr>
+		<td style="vertical-align:top;">
+			<table style="text-align:center">
+			<tbody>
+				<tr><td id="infoBox"></td></tr>
+				<tr><td id="infoPlayers"></td></tr>
+				<tr><td id="infoTime"></td></tr>
+				<tr><td id="infoAge"></td></tr>
+				<tr><td id="infoWeight"></td></tr>
+			</tbody>
+			</table>
+		</td>
+		<td style="max-height: 750px; display: block; overflow-y:auto;">
+			<table>
+			<tbody>
+			<tr><td id="infoName"></td></tr>
+			<tr><td id="infoDesc"></td></tr>
+			<tr><td class="infoTitle">Mechanics</td></tr>
+			<tr><td id="infoMechs"></td></tr>
+			<tr><td class="infoTitle">Categories</td></tr>
+			<tr><td id="infoCats"></td></tr>
+			</tbody>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<div style="position:absolute;top:-5px;right:-5px;color:#333;cursor:pointer;" onclick="info.close()"><i class="fa-solid fa-circle-xmark fa-2x"></i></div>
+
+</div>
+
+</body>
+
+<script>
+loadList   = Object.entries(games).sort((a, b) => parseFloat(a[1].rank) - parseFloat(b[1].rank)).map(entry => entry[0])
+loadIndex  = 100
+loadAmount = 100
+
+filterList  = loadList
+filterCats  = []
+filterMechs = []
+
+likeList = []
+selected = []
+
+colors = ["#2c3e50","#c0392b","#e74c3c","#d35400","#be2edd","#8e44ad","#4834d4","#2980b9","#27ae60","#16a085","#f39c12"]
+
+function containsAllElements(array1, array2) {
+    return array2.every(element => array1.includes(element));
+}
+
+function displayBoxes(idArray){
+	idArray.forEach((id)=>{
+		game = games[id]
+
+		newGameHolder = document.createElement("div")
+		newGameHolder.classList.add("gameHolder")
+		newGameHolder.id = id
+
+		newGameBox = document.createElement("div")
+		newGameBox.classList.add("box")
+		newGameBox.style = "background-image:url('"+game.image+"')"
+		newGameBox.innerHTML = "<div class='face front'></div><div class='face left'></div>"
+		newGameBox.innerHTML +='<i style="color:'+colors[Math.floor(game.score)]+'" score="'+Math.floor(game.score*10)/10+'" class="score fa-solid fa-bookmark fa-3x"></i><span class="year">'+game.year+'</span><span class="rank">'+game.rank+'</span><span class="like" onclick="addLike('+id+')"><i class="fa-solid fa-star fa-2x"></i><i class="fa-regular fa-star fa-2x"></i></span>'
+		newGameBox.setAttribute("onclick","showInfo("+id+")")
+
+		newNameTag = document.createElement("span")
+		newNameTag.classList.add("name")
+		newNameTag.innerHTML = game.name
+
+		newGameHolder.append(newGameBox)
+		newGameHolder.append(newNameTag)
+		document.getElementById("main").append(newGameHolder)
+
+	})
+}
+
+function showInfo(id){
+	document.getElementById("infoName").innerHTML = games[id].name
+	document.getElementById("infoDesc").innerHTML = games[id].description.replace(/&#10;/g, '</br>')
+
+	iBox = document.getElementById(id).getElementsByClassName("box")[0].cloneNode(true)
+	iBox.setAttribute("onclick","window.open('https://boardgamegeek.com/boardgame/"+id+"')")
+	document.getElementById("infoBox").innerHTML = ""
+	document.getElementById("infoBox").append(iBox)
+
+	document.getElementById("infoPlayers").innerHTML = (games[id].minplayers==games[id].maxplayers?games[id].minplayers:games[id].minplayers+"-"+games[id].maxplayers)
+	document.getElementById("infoTime").innerHTML = games[id].playingtime
+	document.getElementById("infoAge").innerHTML = games[id].minage
+	document.getElementById("infoWeight").innerHTML = Math.floor(games[id].weight*10)/10
+	
+
+	document.getElementById("infoMechs").innerHTML = ""
+	document.getElementById("infoCats").innerHTML = ""
+	
+	games[id].mechanics.forEach((tag)=>{
+		newtag = document.createElement("span")
+		newtag.innerHTML = tag
+		newtag.classList.add("tag")
+		newtag.setAttribute("onclick","tagToggle(this.innerHTML)")
+		
+		document.getElementById('infoMechs').append(newtag)
+	})
+
+	games[id].categories.forEach((tag)=>{
+		newtag = document.createElement("span")
+		newtag.innerHTML = tag
+		newtag.classList.add("tag")
+		newtag.setAttribute("onclick","tagToggle(this.innerHTML)")
+		
+		document.getElementById('infoCats').append(newtag)
+	})
+	
+	info.open()
+}
+
+function clearMain(){
+	document.getElementById("main").innerHTML = ""
+	loadIndex = loadAmount
+}
+
+function filterGames(){
+	filterList=[]
+
+	if(selected==""){
+		loadList.forEach(id=>{
+			if(games[id].name.toLowerCase().includes(document.getElementById("search").value.toLowerCase()) && containsAllElements(games[id].categories,filterCats) && containsAllElements(games[id].mechanics,filterMechs)){
+				filterList.push(id)
+			}
+		})
+	}else{
+		likeList.forEach(id=>{
+			if(games[id].name.toLowerCase().includes(document.getElementById("search").value.toLowerCase()) && containsAllElements(games[id].categories,filterCats) && containsAllElements(games[id].mechanics,filterMechs)){
+				filterList.push(id)
+			}
+		})
+	}
+
+	clearMain()
+	displayBoxes(filterList.slice(0,loadAmount))
+	
+	if(selected!=""){
+		for(i=0;i<loadIndex;i++){
+			document.getElementById(sortedScores[i].gameId).setAttribute("score",Math.floor(sortedScores[i].score*100)+"%")
+		}
+	}
+
+
+}
+
+function filterTags(){
+	Array.from(document.getElementById("filterModal").getElementsByClassName("tag")).forEach(tag=>{
+		if(tag.innerHTML.toLowerCase().includes(document.getElementById("searchTag").value.toLowerCase())){
+			tag.style.display = "inline-block"
+		}else{
+			tag.style.display = "none"
+		}
+	})
+}
+
+function tagToggle(tag){
+	if(cats.includes(tag)||mechs.includes(tag)){
+		if(cats.includes(tag)){
+			tagHolder = document.getElementById("cats")
+			if(filterCats.includes(tag)){filterCats.splice(filterCats.indexOf(tag),1)}else{filterCats.push(tag)}
+		}else{
+			tagHolder = document.getElementById("mechs")
+			if(filterMechs.includes(tag)){filterMechs.splice(filterMechs.indexOf(tag),1)}else{filterMechs.push(tag)}
+		}
+		
+		if(tagHolder.innerHTML.includes(tag)){
+			document.getElementsByClassName(tag.replace(/\s/g, ''))[0].remove()
+		}else{
+			newtag = document.createElement("span")
+			newtag.innerHTML = tag
+			newtag.classList.add("tag",tag.replace(/\s/g, ''))
+			newtag.setAttribute("onclick","tagToggle(this.innerHTML)")
+			
+			tagHolder.append(newtag)
+			tagHolder.style.display = "block"
+		}
+		
+		if(tagHolder.innerHTML==""){tagHolder.style.display = "none"}
+
+		filterGames()
+
+	}else{
+		alert(tag+" is not a valid tag")
+	}
+}
+
+function addLike(id){
+	if(event){event.stopPropagation();}
+
+	if(selected.includes(id)){
+		selected.splice(selected.indexOf(id),1)
+		document.getElementById("games").getElementsByClassName(id)[0].remove()
+		if(document.getElementById("games").innerHTML==""){document.getElementById("games").style.display = "none"}
+	}else{
+		selected.push(id)
+		newtag = document.createElement("span")
+		newtag.innerHTML = games[id].name
+		newtag.classList.add("tag",id)
+		newtag.setAttribute("onclick","addLike("+id+")")
+		
+		document.getElementById("games").append(newtag)
+		document.getElementById("games").style.display = "block"
+	}
+	
+	if(selected==""){
+		filterGames()
+	}else{
+		scoreLike(selected)
+	}
+}
+
+function sortGames(info,increase,button){
+	button.setAttribute("sort",(button.getAttribute("sort")=="true"?"false":"true"))
+	
+	if(increase == "true"){
+		loadList = Object.entries(games).sort((a, b) => (info=="name"?(a[1][info] < b[1][info]?-1:1):a[1][info] - b[1][info])).map(entry => entry[0])
+	}else{
+		loadList = Object.entries(games).sort((a, b) => (info=="name"?(b[1][info] < a[1][info]?-1:1):b[1][info] - a[1][info])).map(entry => entry[0])
+	}
+
+	Array.from(document.getElementById("header").getElementsByClassName("btn")).forEach(btn=>{
+		btn.setAttribute("class","btn")
+	})
+	button.setAttribute("class","btn active")
+
+	filterGames()
+}
+
+function fetchUntilComplete(url) {
+  fetch(url)
+    .then(response => {
+      // Check the status code of the response
+      if (response.status === 202) {
+        console.log('Status 202, retrying...');
+        // If status is 202, retry after a delay
+        setTimeout(() => fetchUntilComplete(url), 1000); // Retry after 1 second
+      } else if (response.status === 200) {
+        console.log('Status 200, processing data...');
+		alert("Loading, please wait.")
+        // Convert response to text
+        return response.text();
+      } else {
+        // Handle other status codes if necessary
+        throw new Error(`Unexpected status: ${response.status}`);
+      }
+    })
+    .then(data => {
+      if (data) {
+        // Parse XML to JavaScript Object
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data, 'text/xml');
+        
+		xml.querySelectorAll('[subtype="boardgame"]').forEach(x=>{
+			if(Object.keys(games).includes(x.getAttribute("objectid"))){
+				addLike(Number(x.getAttribute("objectid")))
+			}
+		})
+
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function loadUser(){
+	let user = prompt("Enter Username to import Collection")
+	
+	if (user!=null){
+		fetchUntilComplete('https://boardgamegeek.com/xmlapi2/collection?username='+user);
+	}
+}
+
+window.addEventListener('scroll', function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+		if(selected==""){
+			displayBoxes(filterList.slice(loadIndex,loadIndex+loadAmount))
+		}else{
+			displayBoxes(likeList.slice(loadIndex,loadIndex+loadAmount))
+			for(i=loadIndex;i<loadIndex+loadAmount;i++){
+				document.getElementById(sortedScores[i].gameId).setAttribute("score",Math.floor(sortedScores[i].score*100)+"%")
+			}
+
+		}
+		loadIndex += loadAmount
+
+	
+    }
+});
+
+
+displayBoxes(loadList.slice(0,loadAmount))
+
+var modal = new PlainModal(document.getElementById('filterModal'));
+
+document.getElementById('filterModal').innerHTML += "<h1>Mechanics</h1>"
+mechs.forEach((tag)=>{
+	newtag = document.createElement("span")
+	newtag.innerHTML = tag
+	newtag.classList.add("tag")
+	newtag.setAttribute("onclick","tagToggle(this.innerHTML)")
+	
+	document.getElementById('filterModal').append(newtag)
+})
+
+document.getElementById('filterModal').innerHTML += "<h1>Categories</h1>"
+cats.forEach((tag)=>{
+	newtag = document.createElement("span")
+	newtag.innerHTML = tag
+	newtag.classList.add("tag")
+	newtag.setAttribute("onclick","tagToggle(this.innerHTML)")
+	
+	document.getElementById('filterModal').append(newtag)
+})
+document.getElementById('filterModal').innerHTML += '</br><div style="width:50%;background:#999;display:inline-block;margin-top:15px;font-size: 24px; font-weight: 600;padding: 10px 0;border-radius: 10px;cursor:pointer;" onclick="modal.close()">Close</div>'
+
+var info = new PlainModal(document.getElementById('infoModal'));
+
+
+</script>
+
+
+</html>
